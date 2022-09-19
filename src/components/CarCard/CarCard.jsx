@@ -1,43 +1,32 @@
 import { useState } from "react";
+import {InfoList, CarCardStyle, CardTitle,
+        ButtonsDiv, Button, ListItem } from "./CarCardStyles";
 
 
 
-export default function CarCard({car, showContent, onClickShowContent, onClickDeleteContent}){
+export default function CarCard({car, showContent, onClickShowContent, onClickDeleteContent, onClickCloseContent}){
 
   return(
-    <>
+    <CarCardStyle>
     
-           <h3>{car.title}</h3>
+           <CardTitle>{car.title}</CardTitle>
            {showContent ? 
-          (<ul key={car._id}>
-             <li>id: {car._id}</li>
-             <li>Brand: {car.brand}</li>
-             <li>Price: {car.price}</li>
-             <li>Age: {car.age}</li>
-          </ul>)
-           : (<button onClick={onClickShowContent}>Show Info</button>)}         
-          <button onClick={onClickDeleteContent}>Delete</button>
-    </>
+          <InfoList key={car._id}>
+             <ListItem><strong>ID:</strong> {car._id}</ListItem>
+             <ListItem><strong>Brand:</strong> {car.brand}</ListItem>
+             <ListItem><strong>Price:</strong> R$ {parseInt(car.price)},00</ListItem>
+             <ListItem><strong>Age:</strong> {car.age}</ListItem>
+             <ButtonsDiv>
+                <Button onClick={onClickCloseContent}>CLOSE INFO</Button>         
+                <Button onClick={onClickDeleteContent}>DELETE</Button>
+             </ButtonsDiv>
+          </InfoList>          
+           : <Button className='show-button'onClick={onClickShowContent}>SHOW INFO</Button>}          
+
+          
+    </CarCardStyle>
   )
 };
 
 
 
-// {carContent.map(item => {
-//   return(      
-//      <>
-        
-//         <ul carId={item._id} key={item._id}>
-//           <li><h3 carName={item.title}>{item.title}</h3></li>
-//           {showContent ? 
-//           (<ul>
-//              <li>id: {item._id}</li>
-//              <li carBRand={item.brand}>Brand: {item.brand}</li>
-//              <li carPrice={item.price}>Price: {item.price}</li>
-//              <li carAge={item.age}>Age: {item.age}</li>
-//           </ul>)
-//            : (<button onClick={()=> setshowContent(true)}>Ver mais</button>)}         
-//         </ul>         
-//      </>       
-//   )
-//   })}
